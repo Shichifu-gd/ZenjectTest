@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using Zenject;
 using System;
 
 public class HeroView : Person
 {
-    [SerializeField] private ScrObjModel scrObjModel;
+    [SerializeField]
+    private ScrObjModel scrObjModel;
     private Presenter presenter = new Presenter();
     private Model model = new Model();
     public Move move;
@@ -13,7 +15,6 @@ public class HeroView : Person
     private int DirectionLook = 1;
 
     private Transform View;
-
     private Vector2 DirectionMove;
 
     private void Awake()
@@ -59,4 +60,11 @@ public class HeroView : Person
             OnTakeDamage(UnityEngine.Random.Range(1, 7));
         }
     }
+
+    public void NewPosition(Vector3 transform)
+    {
+        gameObject.transform.position = transform;
+    }
+
+    public class Factory : PlaceholderFactory<HeroView> { }
 }

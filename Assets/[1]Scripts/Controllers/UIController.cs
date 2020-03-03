@@ -1,18 +1,20 @@
 ﻿using System.Collections;
-using Zenject;
 using UnityEngine;
+using Zenject;
 
 public class UIController : MonoBehaviour
 {
     [Inject]
-    private GameController gameController;
+    public GameController gameController;
 
     [SerializeField] private GameObject PanelForTest;
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
-        PanelForTest = transform.FindChild("PanelTest").gameObject;
+        PanelForTest = transform.Find("PanelTest").gameObject;
     }
+#endif
 
     public void ShowAllPanel()
     {

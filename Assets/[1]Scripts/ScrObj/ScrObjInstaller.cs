@@ -4,15 +4,12 @@ using Zenject;
 [CreateAssetMenu(fileName = "SoInstaller", menuName = "Create SoInstaller")]
 public class ScrObjInstaller : ScriptableObjectInstaller
 {
-    [SerializeField]
-    private Configuration configuration;
-
-    [SerializeField]
-    private GameObject HeroPre;
+    public ScrObjConfiguration configuration;
+    public ScrObjPrefabs scrObjPrefabs;
 
     public override void InstallBindings()
     {
         Container.BindInstance(configuration);
-        Container.BindInstance(HeroPre);
+        Container.BindInstance(scrObjPrefabs);
     }
 }

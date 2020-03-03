@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using Zenject;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
+using Zenject;
 
 public class GameController : MonoBehaviour
 {
-    [Inject] private GameObject HeroPre;
+    [Inject] public UIController uIController;
+    [Inject] private Spawner spawner;
 
     public bool CanMove { get; set; }
 
@@ -16,12 +16,12 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        CreatePrefabs(HeroPre);
+        StartSpawn();
     }
 
-    private void CreatePrefabs(GameObject prefab)
+    private void StartSpawn()
     {
-        GameObject.Instantiate(prefab);
+        spawner.StartSpawner();
     }
 
     public void Restart()
