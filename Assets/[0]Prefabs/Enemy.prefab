@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5305118926161474993}
-  - component: {fileID: 5305118926821451877}
-  - component: {fileID: 5305118926821451876}
-  - component: {fileID: 246831512845313971}
-  - component: {fileID: -1200421492097847372}
+  - component: {fileID: 1493716292670951348}
+  - component: {fileID: 751883003947847994}
+  - component: {fileID: 124178663954548248}
+  - component: {fileID: 2846094567215769794}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -28,14 +28,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5305118926821451881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1821848, y: -0.9847208, z: 1.5137081}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5305118927259750135}
+  - {fileID: 5410335888701471828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5305118926821451877
+--- !u!61 &1493716292670951348
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +62,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &5305118926821451876
+--- !u!50 &751883003947847994
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &246831512845313971
+--- !u!114 &124178663954548248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 809cc2501a84c0d478833e12efd9ce8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrObjModel: {fileID: 11400000, guid: a1a3d7aef55130948a1933d48e2e24f7, type: 2}
-  move: {fileID: -1200421492097847372}
---- !u!114 &-1200421492097847372
+  scrObjModel: {fileID: 11400000, guid: 3a40fae50e24dd247a68c09938ac975c, type: 2}
+  move: {fileID: 2846094567215769794}
+  Target: {fileID: 0}
+  RangZoneAggression: {fileID: 5849280801715376879}
+--- !u!114 &2846094567215769794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,3 +191,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7896357969664928375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5410335888701471828}
+  - component: {fileID: 5849280801715376879}
+  - component: {fileID: 6538394351113202774}
+  m_Layer: 0
+  m_Name: ZoneAggression
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5410335888701471828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896357969664928375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5305118926161474993}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5849280801715376879
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896357969664928375}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.38
+--- !u!114 &6538394351113202774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896357969664928375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0cd4e94d4e45354e8ea8580de7596ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

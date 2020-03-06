@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6de875337c96f4ead3cecff2fe9133, type: 3}
-  m_Name: Model
+  m_Name: Model_v0
   m_EditorClassIdentifier: 
   Health: 15
   Speed: 5

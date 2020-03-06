@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 public class GameInstaller : MonoInstaller
 {
@@ -8,24 +6,24 @@ public class GameInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InstallMessange();
         InstallOther();
+        InstallMessange();
         InstallEnemy();
         InstallPlayer();
         InstallSpawner();
+    }
+
+    private void InstallOther()
+    {
+        Container.Bind(typeof(IMessage), typeof(ITickable))
+            .To<Message>()
+            .AsSingle();
     }
 
     private void InstallMessange()
     {
         Container.Bind<string>().FromInstance("Hello World!");
         Container.Bind<Greeter>().AsSingle().NonLazy();
-    }
-
-    private void InstallOther()
-    {
-        Container.Bind<IMessage>()
-            .To<Message>()
-            .AsSingle();
     }
 
     private void InstallEnemy()
@@ -38,20 +36,24 @@ public class GameInstaller : MonoInstaller
     private void InstallPlayer()
     {
         Container.BindFactory<HeroView, HeroView.Factory>()
-           .FromComponentInNewPrefab(Prefabs.HeroPrefab);
+            .FromComponentInNewPrefab(Prefabs.HeroPrefab);
     }
 
     private void InstallSpawner()
     {
         Container.Bind<Spawner>()
-        .AsSingle();
+            .AsSingle();
     }
 }
 
 public class Greeter
 {
-    public Greeter(string message)
+    private IMessage message;
+
+    [Inject]
+    public Greeter(IMessage getMessage, string newMessage)
     {
-        Debug.Log(message);
+        message = getMessage;
+        message.MessageTwo(newMessage);
     }
 }

@@ -4,11 +4,17 @@ using System;
 
 public class HeroView : Person
 {
+    private IMessage iMessage; // TODO: DeleteMe!!
+
+    [Inject]
+    private PlayerBar playerBar;
     [SerializeField]
     private ScrObjModel scrObjModel;
+    [SerializeField]
+    private Move move;
+
     private Presenter presenter = new Presenter();
     private Model model = new Model();
-    public Move move;
 
     public override event Action<int> OnTakeDamage;
 
@@ -17,10 +23,17 @@ public class HeroView : Person
     private Transform View;
     private Vector2 DirectionMove;
 
+    [Inject]
+    public void Construct(IMessage message)
+    {
+        iMessage = message;
+    }
+
     private void Awake()
     {
         View = transform.Find("View");
         presenter.SetSetting(model, this, move, scrObjModel);
+        playerBar.AssignValues(model.GetMaxHealth());
     }
 
     private void Update()
@@ -37,7 +50,7 @@ public class HeroView : Person
 
     private void Move()
     {
-        move.OnMove(transform, DirectionMove);
+        if (move != null) move.OnMove(transform, DirectionMove);
     }
 
     private void Turn()
@@ -46,24 +59,30 @@ public class HeroView : Person
         View.localScale = new Vector3(DirectionLook, 1, 1);
     }
 
-    public override void HealthAnimation(int curhealth, int maxHealth) { return; }
-
-    public override void Death()
-    {
-        Destroy(gameObject);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<EnemyView>())
         {
-            OnTakeDamage(UnityEngine.Random.Range(1, 7));
+            var takeDamege = UnityEngine.Random.Range(1, 7);
+            OnTakeDamage(takeDamege);
+            iMessage.MessageOne($"Hero: Takes damage - {takeDamege}");
         }
+    }
+
+    public override void HealthAnimation(int curHealth)
+    {
+        playerBar.SetHealthBar(curHealth);
     }
 
     public void NewPosition(Vector3 transform)
     {
         gameObject.transform.position = transform;
+    }
+
+    public override void Death()
+    {
+        Destroy(gameObject); // TODO: FiXME
+        iMessage.MessageOne("i seem to see the light at the end of the tunnel");
     }
 
     public class Factory : PlaceholderFactory<HeroView> { }

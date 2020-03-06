@@ -4,10 +4,7 @@ public class MoveVersion1 : Move
 {
     private float MoveSpeed;
 
-    public override void SetMove(ScrObjModel scrObjModel)
-    {
-        MoveSpeed = scrObjModel.Speed;
-    }
+    public override void SetMove(ScrObjModel scrObjModel) { MoveSpeed = scrObjModel.Speed; }
 
     public override void OnMove(Transform currentTransform, Vector2 directionMove)
     {
