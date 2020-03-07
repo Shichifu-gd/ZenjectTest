@@ -8,28 +8,26 @@ public class EnemyView : Person
 
     [SerializeField]
     private ScrObjModel scrObjModel;
+
     private Presenter presenter = new Presenter();
     private Model model = new Model();
-
     public Move move;
+    public ZoneAggressionController zoneAggressionController;
 
-    public Person Target;
+    private Person Target;
 
     public override event Action<int> OnTakeDamage;
 
     private int DirectionLook = 1;
-    private float Range = 3;
+
     private bool CanMove;
 
-    private Transform View;
-    private Vector2 DirectionMove;
-
     private Transform TargetPosition;
+    private Transform View;
+
+    private Vector2 DirectionMove;
     private Vector2 TargetDirection;
     private Vector2 TargetDirectionNormalized;
-
-    [SerializeField]
-    private CircleCollider2D RangZoneAggression;
 
     [Inject]
     public void Construct(IMessage message)
@@ -40,14 +38,23 @@ public class EnemyView : Person
     public void SetTarget(Person newTarget)
     {
         Target = newTarget;
-        if (Target != null) TargetPosition = newTarget.transform;
+        if (Target != null)
+        {
+            TargetPosition = newTarget.transform;
+            zoneAggressionController.StateAnger();
+            iMessage.MessageOne("Enemy: I see you!!");
+        }
+        else
+        {
+            zoneAggressionController.StateCalm();
+            iMessage.MessageOne("Enemy: Where did you go ..");
+        }
     }
 
     private void Awake()
     {
         View = transform.Find("View");
         presenter.SetSetting(model, this, move, scrObjModel);
-        RangZoneAggression.radius = Range;
     }
 
     private void Update()
@@ -58,30 +65,36 @@ public class EnemyView : Person
 
     private void AIController()
     {
-        if (Target != null)
-        {
-            TargetDirection = new Vector2(TargetPosition.position.x, TargetPosition.position.y) - new Vector2(transform.position.x, transform.position.y);
-            TargetDirectionNormalized = TargetDirection.normalized;
-            DirectionMove = TargetDirectionNormalized;
-            CanMove = true;
-        }
-        else CanMove = false;
+        if (Target != null) TargetFound();
+        else TargetIsLost();
     }
+
+    private void TargetFound()
+    {
+        TargetDirection = new Vector2(TargetPosition.position.x, TargetPosition.position.y) - new Vector2(transform.position.x, transform.position.y);
+        TargetDirectionNormalized = TargetDirection.normalized;
+        DirectionMove = TargetDirectionNormalized;
+        CanMove = true;
+    }
+
+    private void TargetIsLost() { CanMove = false; }
 
     private void Move()
     {
         if (move != null && CanMove) move.OnMove(transform, DirectionMove);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetComponent<HeroView>())
-        {
-            iMessage.MessageOne("Enemy: Ai, it hurts me");
-            var takeDamege = UnityEngine.Random.Range(1, 7);
-            OnTakeDamage(takeDamege);
-            iMessage.MessageOne($"Enemy: Takes damage - {takeDamege}");
-        }
+        if (collision.gameObject.GetComponent<HeroView>()) TakeDamage();
+    }
+
+    private void TakeDamage()
+    {
+        iMessage.MessageOne("Enemy: Ai, it hurts me");
+        var takeDamege = UnityEngine.Random.Range(1, 7);
+        OnTakeDamage(takeDamege);
+        iMessage.MessageOne($"Enemy: Takes damage - {takeDamege}");
     }
 
     public override void HealthAnimation(int curHealth) { return; }

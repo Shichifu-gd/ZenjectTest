@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEngine.SceneManagement;
+using UnityEngine;
 using UnityEditor;
 using Zenject;
 
@@ -14,6 +15,11 @@ public class GameController : MonoBehaviour
         StartGame();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) Restart();
+    }
+
     public void StartGame()
     {
         StartSpawn();
@@ -26,11 +32,12 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Exit()
     {
         EditorApplication.isPaused = true;
+        // Restart();
     }
 }

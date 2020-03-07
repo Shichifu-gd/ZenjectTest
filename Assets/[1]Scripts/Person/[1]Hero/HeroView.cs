@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 using Zenject;
 using System;
 
@@ -6,6 +7,7 @@ public class HeroView : Person
 {
     private IMessage iMessage; // TODO: DeleteMe!!
 
+    private CinemachineVirtualCamera Camera;
     [Inject]
     private PlayerBar playerBar;
     [SerializeField]
@@ -24,9 +26,10 @@ public class HeroView : Person
     private Vector2 DirectionMove;
 
     [Inject]
-    public void Construct(IMessage message)
+    public void Construct(IMessage message, CinemachineVirtualCamera cinemachineVirtualCamera)
     {
         iMessage = message;
+        Camera = cinemachineVirtualCamera;
     }
 
     private void Awake()
@@ -34,6 +37,7 @@ public class HeroView : Person
         View = transform.Find("View");
         presenter.SetSetting(model, this, move, scrObjModel);
         playerBar.AssignValues(model.GetMaxHealth());
+        Camera.Follow = transform;
     }
 
     private void Update()
@@ -59,14 +63,16 @@ public class HeroView : Person
         View.localScale = new Vector3(DirectionLook, 1, 1);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetComponent<EnemyView>())
-        {
-            var takeDamege = UnityEngine.Random.Range(1, 7);
-            OnTakeDamage(takeDamege);
-            iMessage.MessageOne($"Hero: Takes damage - {takeDamege}");
-        }
+        if (collision.gameObject.GetComponent<EnemyView>()) TakeDamage();
+    }
+
+    private void TakeDamage()
+    {
+        var takeDamege = UnityEngine.Random.Range(1, 7);
+        OnTakeDamage(takeDamege);
+        iMessage.MessageOne($"Hero: Takes damage - {takeDamege}");
     }
 
     public override void HealthAnimation(int curHealth)

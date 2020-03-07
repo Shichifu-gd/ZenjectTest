@@ -15,6 +15,6 @@ public class PlayerBar : MonoBehaviour
     public void SetHealthBar(int health)
     {
         float num = health;
-        ImageHealthBar.fillAmount = num / LocalMaxHealth;
+        ImageHealthBar.fillAmount = num / LocalMaxHealth; // TODO: add coroutine
     }
 }

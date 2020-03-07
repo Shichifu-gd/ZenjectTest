@@ -20,7 +20,7 @@ public class Spawner
     public void StartSpawner()
     {
         SpawnPlayer();
-        SpawnEnemy(GetRandomAmount(1, 5));
+        SpawnEnemy(GetRandomAmount(1, 10));
     }
 
     public void SpawnPlayer()
@@ -36,7 +36,7 @@ public class Spawner
         for (int i = 0; i < amount; i++)
         {
             var newEnemy = EnemyFactory.Create();
-            newEnemy.NewPosition(GetRandomStartPosition(-5, 5));
+            newEnemy.NewPosition(GetRandomStartPosition(-10, 10));
         }
     }
 
