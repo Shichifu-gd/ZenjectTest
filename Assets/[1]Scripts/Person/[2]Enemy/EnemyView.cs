@@ -86,13 +86,12 @@ public class EnemyView : Person
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<HeroView>()) TakeDamage();
+        if (collision.gameObject.GetComponent<HeroView>()) TakeDamage(UnityEngine.Random.Range(1, 7));
     }
 
-    private void TakeDamage()
+    public override void TakeDamage(int takeDamege)
     {
         iMessage.MessageOne("Enemy: Ai, it hurts me");
-        var takeDamege = UnityEngine.Random.Range(1, 7);
         OnTakeDamage(takeDamege);
         iMessage.MessageOne($"Enemy: Takes damage - {takeDamege}");
     }

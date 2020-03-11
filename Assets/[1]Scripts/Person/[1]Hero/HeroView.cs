@@ -65,12 +65,11 @@ public class HeroView : Person
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<EnemyView>()) TakeDamage();
+        if (collision.gameObject.GetComponent<EnemyView>()) TakeDamage(UnityEngine.Random.Range(1, 7));
     }
 
-    private void TakeDamage()
+    public override void TakeDamage(int takeDamege)
     {
-        var takeDamege = UnityEngine.Random.Range(1, 7);
         OnTakeDamage(takeDamege);
         iMessage.MessageOne($"Hero: Takes damage - {takeDamege}");
     }
@@ -87,7 +86,7 @@ public class HeroView : Person
 
     public override void Death()
     {
-        Destroy(gameObject); // TODO: FiXME
+        gameObject.SetActive(false); // TODO: FiXME
         iMessage.MessageOne("i seem to see the light at the end of the tunnel");
     }
 
