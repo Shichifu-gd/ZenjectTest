@@ -22,7 +22,7 @@ public class GameInstaller : MonoInstaller
 
     private void InstallMessange()
     {
-        Container.Bind<string>().FromInstance("Hello World!");
+        Container.Bind<string>().FromInstance("<color=#ff00ffff>System</color>: Hello World!");
         Container.Bind<Greeter>().AsSingle().NonLazy();
     }
 

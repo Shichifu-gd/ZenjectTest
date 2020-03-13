@@ -24,8 +24,5 @@ public class ZoneAggression : MonoBehaviour
         if (collision.GetComponent<HeroView>()) RemovesTarget();
     }
 
-    private void RemovesTarget()
-    {
-        enemy.SetTarget(null);
-    }
+    private void RemovesTarget() { enemy.SetTarget(null); }
 }

@@ -5,7 +5,7 @@ using System;
 
 public class HeroView : Person
 {
-    private IMessage iMessage; // TODO: DeleteMe!!
+    private IMessage iMessage;
 
     private CinemachineVirtualCamera Camera;
     [Inject]
@@ -71,7 +71,7 @@ public class HeroView : Person
     public override void TakeDamage(int takeDamege)
     {
         OnTakeDamage(takeDamege);
-        iMessage.MessageOne($"Hero: Takes damage - {takeDamege}");
+        iMessage.MessageOne($"<color=blue>Hero</color>: Takes damage - {takeDamege}");
     }
 
     public override void HealthAnimation(int curHealth)
@@ -87,7 +87,7 @@ public class HeroView : Person
     public override void Death()
     {
         gameObject.SetActive(false); // TODO: FiXME
-        iMessage.MessageOne("i seem to see the light at the end of the tunnel");
+        iMessage.MessageOne("<color=blue>Hero</color>: i seem to see the light at the end of the tunnel");
     }
 
     public class Factory : PlaceholderFactory<HeroView> { }

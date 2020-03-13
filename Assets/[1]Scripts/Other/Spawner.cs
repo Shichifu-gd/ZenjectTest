@@ -2,7 +2,7 @@
 
 public class Spawner
 {
-    private IMessage iMessage; // TODO: don't forget to remove me!!
+    private IMessage iMessage;
 
     private UIController UI;
 
@@ -25,7 +25,7 @@ public class Spawner
 
     public void SpawnPlayer()
     {
-        iMessage.MessageOne("SpawnPlayer");
+        iMessage.MessageOne("<color=#ff00ffff>System</color>: SpawnPlayer");
         var newHero = HeroFactory.Create();
         newHero.NewPosition(GetRandomStartPosition(-5, 5));
     }
@@ -42,7 +42,7 @@ public class Spawner
 
     private int QuantityEnemyCheck(int amount)
     {
-        iMessage.MessageOne($"SpawnEnemy, amount - {amount}");
+        iMessage.MessageOne($"<color=#ff00ffff>System</color>: SpawnEnemy, amount - {amount}");
         if (amount <= 0) amount = 1;
         UI.SetCoutEnemy(amount.ToString());
         return amount;

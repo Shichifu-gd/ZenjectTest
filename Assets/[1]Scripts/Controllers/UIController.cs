@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
 
     public void SetCoutEnemy(string value)
     {
-        CoutEnemy.text = $"Cout enemy : {value}";
+        CoutEnemy.text = $"Cout <color=#008080ff>enemy</color> : <color=red>{value}</color>";
     }
 
     public void ShowAllPanel()

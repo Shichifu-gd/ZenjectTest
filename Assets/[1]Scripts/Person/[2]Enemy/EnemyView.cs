@@ -4,7 +4,7 @@ using System;
 
 public class EnemyView : Person
 {
-    private IMessage iMessage; // TODO: DeleteMe!!
+    private IMessage iMessage;
 
     [SerializeField]
     private ScrObjModel scrObjModel;
@@ -42,12 +42,12 @@ public class EnemyView : Person
         {
             TargetPosition = newTarget.transform;
             zoneAggressionController.StateAnger();
-            iMessage.MessageOne("Enemy: I see you!!");
+            iMessage.MessageOne("<color=red>Enemy</color>: I see you!!");
         }
         else
         {
             zoneAggressionController.StateCalm();
-            iMessage.MessageOne("Enemy: Where did you go ..");
+            iMessage.MessageOne("<color=red>Enemy</color>: Where did you go ..");
         }
     }
 
@@ -91,9 +91,9 @@ public class EnemyView : Person
 
     public override void TakeDamage(int takeDamege)
     {
-        iMessage.MessageOne("Enemy: Ai, it hurts me");
+        iMessage.MessageOne("<color=red>Enemy</color>: Ai, it hurts me");
         OnTakeDamage(takeDamege);
-        iMessage.MessageOne($"Enemy: Takes damage - {takeDamege}");
+        iMessage.MessageOne($"<color=red>Enemy</color>: Takes damage - {takeDamege}");
     }
 
     public override void HealthAnimation(int curHealth) { return; }
@@ -101,7 +101,7 @@ public class EnemyView : Person
     public override void Death()
     {
         Destroy(gameObject);
-        iMessage.MessageOne("Enemy: You defeated me, khe");
+        iMessage.MessageOne("<color=red>Enemy</color>: You defeated me, khe");
     }
 
     public void NewPosition(Vector3 transform)
