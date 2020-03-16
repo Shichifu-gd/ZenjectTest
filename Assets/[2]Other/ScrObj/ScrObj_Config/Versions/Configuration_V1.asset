@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567859fae8da42d4bafdca6952d627a0, type: 3}
   m_Name: Configuration_V1
   m_EditorClassIdentifier: 
-  EnemyCount: 7
-  EnemyMinSpeed: 2
-  EnemyMaxSpeed: 5
-  HeroMaxSpeed: 3
+  RangeEnemy: {x: 1, y: 10}
+  RangeTrap: {x: 1, y: 5}

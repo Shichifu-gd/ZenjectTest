@@ -3,5 +3,6 @@
 [CreateAssetMenu(fileName = "Configuration", menuName = "Create configuration")]
 public class ScrObjConfiguration : ScriptableObject
 {
-    public int HealthSupplement;
+    public Vector2 RangeEnemy;
+    public Vector2 RangeTrap;
 }

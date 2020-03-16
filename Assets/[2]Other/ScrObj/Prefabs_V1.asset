@@ -16,3 +16,5 @@ MonoBehaviour:
     type: 3}
   EnemyPrefab: {fileID: 5305118926821451881, guid: dd4f92678c504844581385e5e3fd431a,
     type: 3}
+  TrapPrefab: {fileID: 8980214143873432164, guid: 3341a5d5664511f4aa67368bdf4bf0a9,
+    type: 3}

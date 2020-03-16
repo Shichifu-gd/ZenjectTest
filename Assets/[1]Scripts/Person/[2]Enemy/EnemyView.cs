@@ -4,15 +4,16 @@ using System;
 
 public class EnemyView : Person
 {
-    private IMessage iMessage;
-
     [SerializeField]
     private ScrObjModel scrObjModel;
 
+    private IMessage iMessage;
+    private TurnOfRespawn respawn;
+
+    public ZoneAggressionController zoneAggressionController;
     private Presenter presenter = new Presenter();
     private Model model = new Model();
     public Move move;
-    public ZoneAggressionController zoneAggressionController;
 
     private Person Target;
 
@@ -30,9 +31,10 @@ public class EnemyView : Person
     private Vector2 TargetDirectionNormalized;
 
     [Inject]
-    public void Construct(IMessage message)
+    public void Construct(IMessage message, TurnOfRespawn turnOfRespawn)
     {
         iMessage = message;
+        respawn = turnOfRespawn;
     }
 
     public void SetTarget(Person newTarget)
@@ -100,7 +102,7 @@ public class EnemyView : Person
 
     public override void Death()
     {
-        Destroy(gameObject);
+        respawn.RegisterGOEnemy(gameObject);
         iMessage.MessageOne("<color=red>Enemy</color>: You defeated me, khe");
     }
 

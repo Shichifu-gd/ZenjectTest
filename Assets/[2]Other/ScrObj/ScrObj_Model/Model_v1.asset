@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6de875337c96f4ead3cecff2fe9133, type: 3}
   m_Name: Model_v1
   m_EditorClassIdentifier: 
-  Health: 40
+  Health: 2
   Speed: 2

@@ -7,6 +7,11 @@ public class GameController : MonoBehaviour
 {
     [Inject] public UIController uIController;
     [Inject] private Spawner spawner;
+    [Inject] private TurnOfRespawn turnOfRespawn;
+
+    [SerializeField]
+    private float EndTime = 5;
+    private float CurrentTime;
 
     public bool CanMove { get; set; }
 
@@ -18,6 +23,8 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) Restart();
+        if (CurrentTime >= EndTime) AllRespawn();
+        else CurrentTime += Time.deltaTime;
     }
 
     public void StartGame()
@@ -30,14 +37,21 @@ public class GameController : MonoBehaviour
         spawner.StartSpawner();
     }
 
-    public void Restart()
+    private void AllRespawn()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        turnOfRespawn.UnregisterGOTrap();
+        turnOfRespawn.UnregisterGOEnemy();
+        CurrentTime = 0;
     }
 
     public void Exit()
     {
         EditorApplication.isPaused = true;
         // Restart();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

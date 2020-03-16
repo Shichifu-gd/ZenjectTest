@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour
     private GameController gameController;
 
     [SerializeField] private TextMeshProUGUI CoutEnemy;
+    [SerializeField] private TextMeshProUGUI CoutTrap;
+    [SerializeField] private TextMeshProUGUI TurnCoutEnemy;
+    [SerializeField] private TextMeshProUGUI TurnCoutTrap;
 
     private GameObject PanelForTest;
     private GameObject PanelGameLog;
@@ -21,6 +24,21 @@ public class UIController : MonoBehaviour
     public void SetCoutEnemy(string value)
     {
         CoutEnemy.text = $"Cout <color=#008080ff>enemy</color> : <color=red>{value}</color>";
+    }
+
+    public void SetCoutTrap(string value)
+    {
+        CoutTrap.text = $"Cout <color=#008080ff>Trap</color> : <color=red>{value}</color>";
+    }
+
+    public void SetTurnCoutEnemy(string value)
+    {
+        TurnCoutEnemy.text = $"Death <color=#008080ff>enemy</color> : <color=red>{value}</color>";
+    }
+
+    public void SetTurnCoutTrap(string value)
+    {
+        TurnCoutTrap.text = $"Death <color=#008080ff>Trap</color> : <color=red>{value}</color>";
     }
 
     public void ShowAllPanel()

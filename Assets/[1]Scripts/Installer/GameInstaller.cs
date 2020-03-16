@@ -8,9 +8,9 @@ public class GameInstaller : MonoInstaller
     {
         InstallOther();
         InstallMessange();
+        InstallSpawner();
         InstallEnemy();
         InstallPlayer();
-        InstallSpawner();
     }
 
     private void InstallOther()
@@ -28,9 +28,22 @@ public class GameInstaller : MonoInstaller
 
     private void InstallEnemy()
     {
+        Enemy();
+        Trap();
+    }
+
+    private void Enemy()
+    {
         Container.BindFactory<EnemyView, EnemyView.Factory>()
             .FromComponentInNewPrefab(Prefabs.EnemyPrefab)
             .UnderTransformGroup("Enemy");
+    }
+
+    private void Trap()
+    {
+        Container.BindFactory<TrapView, TrapView.Factory>()
+          .FromComponentInNewPrefab(Prefabs.TrapPrefab)
+          .UnderTransformGroup("Trap");
     }
 
     private void InstallPlayer()
@@ -41,6 +54,12 @@ public class GameInstaller : MonoInstaller
 
     private void InstallSpawner()
     {
+        Container.Bind<SpawnerSettings>()
+           .AsSingle();
+
+        Container.Bind<TurnOfRespawn>()
+            .AsSingle();
+
         Container.Bind<Spawner>()
             .AsSingle();
     }
